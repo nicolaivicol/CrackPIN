@@ -23,7 +23,7 @@ namespace CrackPIN
                 while (!d.isGuessComplete())
                 {
                     d.CountProbs();
-                    d.PrintProbs();
+                    //d.PrintProbs();
                 }
                 Console.WriteLine("best guess: {0}", d.GuessToString());
                 Console.Write("submit ? (Hit enter for buest guess or type your guess) : ");
