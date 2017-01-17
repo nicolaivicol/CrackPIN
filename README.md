@@ -6,5 +6,5 @@ The console application (*CrackPIN.exe*) will give you the best PIN guess to sub
 
 ## The algorithm
 The game wants a PIN of size 4 with non-repeating digits, meaning there are initially 5040 possible PINs (4-permutations of 10). The algorithm pursues a greedy strategy of submitting the most probable PIN (permutation) given all provided information (responses to submits). Each new response to submit is intersected with previous information so that impossible PINs are fitered out and the set of remaining possible PINs becomes smaller.   
-A buest guess is created by finding first the most probable/frequent digit at a given position in the set of possible PINs. Then it finds the second digit, most probable given the first digit selected. This is done untill the PIN of 4 digits is formed.   
+A buest guess is created by finding first the most probable/frequent (in the set of possible PINs) digit at one of the 4 positions. Then it finds the second digit on one of the 3 positions left, most probable given the first digit selected. This is done untill the PIN of 4 digits is formed.   
   
