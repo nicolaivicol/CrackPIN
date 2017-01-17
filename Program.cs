@@ -63,7 +63,7 @@ namespace CrackPIN
                 d.UpdateIsOn();
                 if (d.cnt_left == 0)
                 {
-                    Console.WriteLine("(!) Some erroneous feedbacks were given, mutually excluding each other. Start again.");
+                    Console.WriteLine("(!) Some erroneous feedbacks were given, mutually excluding each other. No possible PINs left. Start again.");
                     Console.ReadLine();
                     return;
                 }
