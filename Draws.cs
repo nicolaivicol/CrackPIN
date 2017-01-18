@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +8,14 @@ namespace CrackPIN
 {
     public class Draws
     {
-        public List<int> elements;
-        public int k;
-        public int n;
-        public List<Draw> draws;
+        public List<int> elements; // what elements (digits) to arrange in a permutation : 0,1,...9
+        public int k; // 
+        public int n; //
+        public List<Draw> draws; // all possible draws (permutations)
         public double[][] probs; // k arrays woth array of size n
         public double[] probs_max_k;
-        public double[] probs_max_i_k;
-        public bool[] isOn; //
-        public bool[] isOnPrev; //
-        //public List<bool[]> condts;
+        public bool[] isOnIf; // whether to keep 
+        public bool[] isOn; // filter out impossible draws from a series of ANDs (conditions) found from each the responses to submitted attemtps
         public int[] guess;
         public int[] last_guess;
         public int last_exact_cnt = 0;
@@ -83,11 +81,11 @@ namespace CrackPIN
                 draws.Remove(d);
             }
 
+            isOnIf = new bool[draws.Count];
             isOn = new bool[draws.Count];
-            isOnPrev = new bool[draws.Count];
-            for (int i = 0; i < isOnPrev.Length; i++)
+            for (int i = 0; i < isOn.Length; i++)
             {
-                isOnPrev[i] = true;
+                isOn[i] = true;
             }
 
             Console.WriteLine();
@@ -101,17 +99,17 @@ namespace CrackPIN
             double count_isOn = 0;
             for (int i = 0; i < draws.Count; i++)
             {
-                isOn[i] = isOnPrev[i];
+                isOnIf[i] = isOn[i];
 
                 for (int i_k = 0; i_k < k; i_k++)
                 {
                     if (guess[i_k] >= 0)
                     {
-                        isOn[i] = isOn[i] && (draws[i].elements[i_k] == guess[i_k]);
+                        isOnIf[i] = isOnIf[i] && (draws[i].elements[i_k] == guess[i_k]);
                     }
                 }
 
-                if (isOn[i])
+                if (isOnIf[i])
                 {
                     count_isOn++;
                     for (int i_k = 0; i_k < k; i_k++)
@@ -243,12 +241,12 @@ namespace CrackPIN
         public void UpdateIsOn()
         {
             cnt_left = 0;
-            for (int i = 0; i < isOn.Length; i++)
+            for (int i = 0; i < isOnIf.Length; i++)
             {
-                isOnPrev[i] = isOnPrev[i] && 
+                isOn[i] = isOn[i] && 
                     (CountExist(last_guess, draws[i].elements) == (last_exist_cnt + last_exact_cnt)) && 
                     (CountExact(last_guess, draws[i].elements) == last_exact_cnt);
-                if (isOnPrev[i])
+                if (isOn[i])
                 {
                     cnt_left++;
                 }
