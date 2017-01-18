@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +26,7 @@ namespace CrackPIN
                     //d.PrintProbs();
                 }
                 Console.WriteLine("best guess: {0}", d.GuessToString());
-                Console.Write("submit ? (Hit enter for best guess or type your guess) : ");
+                Console.Write("submit ? (Hit enter for buest guess or type your guess) : ");
                 string s = Console.ReadLine();
                 if (s == "")
                 {
@@ -55,6 +55,7 @@ namespace CrackPIN
                             Console.Write("{0} ", d.submitted[i]);
                         }
                     }
+                    Console.WriteLine();
                     Console.ReadLine();
                     return;
                 }
@@ -63,7 +64,7 @@ namespace CrackPIN
                 d.UpdateIsOn();
                 if (d.cnt_left == 0)
                 {
-                    Console.WriteLine("(!) Some erroneous feedbacks were given, mutually excluding each other. No possible PINs left. Start again.");
+                    Console.WriteLine("(!) Some erroneous feedbacks were given, mutually excluding each other. Start again.");
                     Console.ReadLine();
                     return;
                 }
